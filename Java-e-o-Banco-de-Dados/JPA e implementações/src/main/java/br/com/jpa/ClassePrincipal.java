@@ -7,12 +7,7 @@ import javax.persistence.Persistence;
 public class ClassePrincipal {
     public static void main(String[] args) {
         
-       Estado estado = new Estado("MG", "Minas Gerais");
-       Pessoa pessoa = new Pessoa("Rodrigo", 21, "Masc", estado);
-       
-       insert(pessoa, estado);
-       
-       
+       delete(1);
     }
     
     // Inserir objeto ao banco de dados
@@ -30,4 +25,53 @@ public class ClassePrincipal {
        entityManager.close();
        entityManagerFactory.close();
     }
+    
+    // Selecionar dados no banco de dados
+    public static void select(int id){
+       EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("hibernate.localhost");
+       EntityManager entityManager = entityManagerFactory.createEntityManager();
+       
+       Pessoa pessoa = entityManager.find(Pessoa.class, id);
+       System.out.println(pessoa.toString());
+       
+       entityManager.close();
+       entityManagerFactory.close();
+    }
+    
+    // Realizar update
+    public static void update(int id){
+       EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("hibernate.localhost");
+       EntityManager entityManager = entityManagerFactory.createEntityManager();
+       
+       Pessoa pessoa = entityManager.find(Pessoa.class, id);
+       
+       entityManager.getTransaction().begin();
+       
+       pessoa.setNome("Fernando");
+       pessoa.setSexo("Masc");
+       pessoa.setIdade(22);
+       
+       entityManager.getTransaction().commit();
+       
+       entityManager.close();
+       entityManagerFactory.close();
+    }
+    
+    // Remover pessoa do banco de dados
+    public static void delete(int id){
+       EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("hibernate.localhost");
+       EntityManager entityManager = entityManagerFactory.createEntityManager();
+       
+       Pessoa pessoa = entityManager.find(Pessoa.class, id);
+       
+       entityManager.getTransaction().begin();
+       
+       entityManager.remove(pessoa);
+       
+       entityManager.getTransaction().commit();
+       
+       entityManager.close();
+       entityManagerFactory.close();
+    }
+    
 }

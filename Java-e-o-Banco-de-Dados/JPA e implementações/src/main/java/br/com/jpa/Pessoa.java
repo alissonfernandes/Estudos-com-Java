@@ -71,6 +71,8 @@ public class Pessoa{
 
     @Override
     public String toString() {
-        return "AbstractPessoa{" + "id=" + id + ", nome=" + nome + ", idade=" + idade + ", sexo=" + sexo + '}';
+        return "Pessoa{" + "id=" + id + ", nome=" + nome + ", idade=" + idade + ", sexo=" + sexo + ", estado=" + estado + '}';
     }
+
+   
 }
