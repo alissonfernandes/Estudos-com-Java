@@ -12,7 +12,7 @@ public class ClassePrincipal {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         State state = new State("Minas Gerais", "MG");
-        Anddress anddress = new Anddress("Belo Horizonte", "Centro", "Oscar Pereira Barbosa", 310, " ", state);
+        Anddress anddress = new Anddress("Belo Horizonte", "Centro", "Oscar Pereira Barbosa UDD", -1, " ", state);
         User user = new User("Ruan Renan", 25, "Masc", anddress);
         
         entityManager.getTransaction().begin();

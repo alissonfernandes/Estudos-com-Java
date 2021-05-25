@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity(name = "anddress")
 public class Anddress {
@@ -38,12 +38,12 @@ public class Anddress {
     @ManyToOne(fetch = FetchType.EAGER)
     private State estado;
     
-    @OneToMany(mappedBy = "endereco",
+    @OneToOne(mappedBy = "endereco",
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
     
-    private List<User> users = new ArrayList<>();
+    private User user;
     
     public Anddress(){}
     
