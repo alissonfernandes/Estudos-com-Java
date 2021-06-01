@@ -21,4 +21,8 @@ public class PessoaRepository {
     public void add(final Pessoa pessoa){
         this.pessoas.add(pessoa);
     }
+    
+    public Pessoa getId(final int id){
+        return pessoas.get(id);
+    }
 }
