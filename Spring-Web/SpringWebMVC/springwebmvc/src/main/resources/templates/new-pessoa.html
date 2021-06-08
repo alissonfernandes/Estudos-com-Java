@@ -13,7 +13,7 @@
             <input type="text" name="nome" th:field="*{nome}" th:placeholder="Nome"> <br>
             <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Erro nome</span>
             <br>
-            <input type="text" name="idade" th:field="*{idade}" th:placeholder="Idade"> <br>
+            <input type="number" name="idade" th:field="*{idade}" th:placeholder="Idade"> <br>
             <span th:if="${#fields.hasErrors('idade')}" th:errors="*{idade}">Erro Idade</span>
             <br>
             <button type="submit">Criar nova Pessoa</button>
@@ -24,3 +24,6 @@
         <a th:href="@{/pessoa}">Pessoa</a>
     </body>
 </html>
+
+
+

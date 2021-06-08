@@ -1,13 +1,18 @@
 package br.com.springwebmvc.model;
 
+import javax.validation.constraints.NotBlank;
+
 public class Pessoa {
-    
+   
+    @NotBlank
     private String nome;
-    private int idade;
+    
+    @NotBlank
+    private String idade;
 
     public Pessoa(final String nome, final int idade) {
         this.nome = nome;
-        this.idade = idade;
+        this.idade = Integer.toString(idade);
     }
     
     public Pessoa(){}
@@ -20,13 +25,11 @@ public class Pessoa {
         this.nome = nome;
     }
 
-    public int getIdade() {
+    public String getIdade() {
         return idade;
     }
 
-    public void setIdade(final int idade) {
+    public void setIdade(final String idade) {
         this.idade = idade;
     }
-    
-    
 }
