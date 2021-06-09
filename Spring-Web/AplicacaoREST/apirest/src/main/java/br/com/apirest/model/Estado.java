@@ -23,8 +23,8 @@ public class Estado {
     @Column
     private String sigla;
     
-    @OneToMany(mappedBy = "estado", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Pessoa> pessoas = new ArrayList<>();
+    //@OneToMany(mappedBy = "estado", cascade = CascadeType.PERSIST, orphanRemoval = false)
+   // private List<Pessoa> pessoas = new ArrayList<>();
     
     public Estado(){}
 
@@ -57,17 +57,17 @@ public class Estado {
         this.sigla = sigla;
     }
 
-    public List<Pessoa> getPessoas() {
+    /*public List<Pessoa> getPessoas() {
         return pessoas;
     }
 
     public void setPessoas(List<Pessoa> pessoas) {
         this.pessoas = pessoas;
-    }
+    }*/
 
     @Override
     public String toString() {
-        return "Estado{" + "id=" + id + ", nome=" + nome + ", sigla=" + sigla + ", pessoas=" + pessoas + '}';
+        return "Estado{" + "id=" + id + ", nome=" + nome + ", sigla=" + sigla + /*", pessoas=" + pessoas + */'}';
     }
     
     

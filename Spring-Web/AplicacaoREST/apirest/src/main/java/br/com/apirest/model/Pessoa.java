@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "t_pessoa")
+@Table(name = "pessoa")
 public class Pessoa {
     
     @Id
@@ -26,8 +26,8 @@ public class Pessoa {
     @Column
     private int idade;
     
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Estado estado;
+   /* @ManyToOne(fetch = FetchType.LAZY)
+    private Estado estado;*/
     
     public Pessoa(){}
 
@@ -35,7 +35,7 @@ public class Pessoa {
         this.nome = nome;
         this.sexo = sexo;
         this.idade = idade;
-        this.estado = estado;
+        //this.estado = estado;
     }
 
     public Long getId() {
@@ -70,17 +70,17 @@ public class Pessoa {
         this.idade = idade;
     }
 
-    public Estado getEstado() {
+    /*public Estado getEstado() {
         return estado;
     }
 
     public void setEstado(Estado estado) {
         this.estado = estado;
-    }
+    }*/
 
     @Override
     public String toString() {
-        return "Pessoa{" + "id=" + id + ", nome=" + nome + ", sexo=" + sexo + ", idade=" + idade + ", estado=" + estado + '}';
+        return "Pessoa{" + "id=" + id + ", nome=" + nome + ", sexo=" + sexo + ", idade=" + idade + /*", estado=" + estado + */'}';
     }
     
     
