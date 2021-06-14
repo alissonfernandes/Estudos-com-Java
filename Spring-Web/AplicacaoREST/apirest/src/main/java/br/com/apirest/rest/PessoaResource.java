@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,5 +40,23 @@ public class PessoaResource {
     @PostMapping("/api/pessoa")
     public ResponseEntity<Pessoa> createPessoa(@Valid @RequestBody Pessoa pessoa){
         return new ResponseEntity<Pessoa>(pessoaRepository.save(pessoa), HttpStatus.CREATED);
+    }
+    
+    @PutMapping("/api/pessoa/{id}")
+    public ResponseEntity<Pessoa> updatePessoa(@PathVariable("id") Long id, @RequestBody Pessoa dto){
+        final Optional<Pessoa> entityPessoa = pessoaRepository.findById(id);
+        final Pessoa pessoa;
+        
+        if(entityPessoa.isPresent()){
+            pessoa = entityPessoa.get();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+        
+        pessoa.setNome(dto.getNome());
+        pessoa.setIdade(dto.getIdade());
+        pessoa.setSexo(dto.getSexo());
+        
+        return ResponseEntity.ok(pessoaRepository.save(pessoa));
     }
 }
