@@ -2,6 +2,7 @@ package br.com.apirest.rest;
 
 import br.com.apirest.model.Pessoa;
 import br.com.apirest.repository.PessoaRepository;
+import br.com.apirest.service.PessoaService;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -14,62 +15,40 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class PessoaResource {
     
     @Autowired
-    private PessoaRepository pessoaRepository;
+    private  PessoaService service;
     
     @GetMapping("/api/pessoa")
     public List<Pessoa> getAllPessoa(){
-        return pessoaRepository.findAll();
+        return service.findAll();
     }
     
     @GetMapping("/api/pessoa/{id}")
     public ResponseEntity getPessoa(@PathVariable("id") Long id){
-        final Optional<Pessoa> pessoa = pessoaRepository.findById(id);
-        
-        if(pessoa.isPresent()){
-            return ResponseEntity.ok(pessoa.get());
-        }else{
-            return ResponseEntity.notFound().build();
-        }
+        final Pessoa pessoa = service.findById(id);
+        return ResponseEntity.ok(pessoa);
     }
     
     @PostMapping("/api/pessoa")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Pessoa> createPessoa(@Valid @RequestBody Pessoa pessoa){
-        return new ResponseEntity<Pessoa>(pessoaRepository.save(pessoa), HttpStatus.CREATED);
+        return new ResponseEntity<Pessoa>(service.save(pessoa), HttpStatus.CREATED);
     }
     
     @PutMapping("/api/pessoa/{id}")
     public ResponseEntity<Pessoa> updatePessoa(@PathVariable("id") Long id, @RequestBody Pessoa dto){
-        final Optional<Pessoa> entityPessoa = pessoaRepository.findById(id);
-        final Pessoa pessoa;
-        
-        if(entityPessoa.isPresent()){
-            pessoa = entityPessoa.get();
-        }else{
-            return ResponseEntity.notFound().build();
-        }
-        
-        pessoa.setNome(dto.getNome());
-        pessoa.setIdade(dto.getIdade());
-        pessoa.setSexo(dto.getSexo());
-        
-        return ResponseEntity.ok(pessoaRepository.save(pessoa));
+        return ResponseEntity.ok(service.update(id, dto));
     }
     
     @DeleteMapping("/api/pessoa/{id}")
-    public ResponseEntity deletePessoa(@PathVariable("id") Long id){
-        final Optional<Pessoa> entityPessoa = pessoaRepository.findById(id);
-        
-        if(entityPessoa.isPresent()){
-            pessoaRepository.deleteById(id);
-            return ResponseEntity.noContent().build();
-        }else{
-            return ResponseEntity.notFound().build();
-        }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletePessoa(@PathVariable("id") Long id){
+       service.delete(id);
     }
 }
