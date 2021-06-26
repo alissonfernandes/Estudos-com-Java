@@ -1,32 +1,35 @@
 package br.com.produto.service;
 
 import br.com.produto.model.Produto;
-import java.util.ArrayList;
+import br.com.produto.repository.ProdutoRepository;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ProdutoService {
     
+    @Autowired
+    ProdutoRepository repository;
+    
     public List<Produto> findAllProduto(){
-        List<Produto> produtos = new ArrayList<>();
-        
-        produtos.add(new Produto(1L, "Bermuda", "Bermuda Masculina M"));
-        produtos.add(new Produto(2L, "Camiseta", "Camiseta Feminina P"));
-        
-        return produtos;
+        return repository.findAll();
     }
     
     public Produto findProduto(Long id){
-        return new Produto(id, "Bermuda", "Bermuda Masculina M");
+        return repository.findById(id).get();
     }
     
-    public void saveProduto(Produto produto){
+    public Produto saveProduto(Produto produto){
+        return repository.save(produto);
     }
     
-    public void updateProduto(Long id, Produto produto){
+    public Produto updateProduto(Long id, Produto produto){
+        produto.setId(id);
+        return repository.save(produto);
     }
     
     public void delteProduto(Long id){
+        repository.deleteById(id);
     }
 }
