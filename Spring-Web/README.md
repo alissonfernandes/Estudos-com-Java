@@ -27,3 +27,10 @@ Para acessar os recursos do nosso servidor são utilizados diversas anotações 
 
 ## Response
 * **`ResponseEntity`**: representa toda resposta HTTP. Você pode controlar qualquer coisa que aconteça, código de status, cabeçalhos e corpo.
+
+# Hateoas
+Uma API HATEOAS provê informações que permite navegar entre seus endpoints de forma dinâmica incluindo links junto às respostas.
+
+Com isso deixamos a responsabilidade de acessos e ações para o backend da aplicação.
+
+* 
