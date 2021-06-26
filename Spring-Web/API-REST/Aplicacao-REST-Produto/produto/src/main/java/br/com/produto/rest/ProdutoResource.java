@@ -36,20 +36,17 @@ public class ProdutoResource {
     
     @PostMapping("/")
     public ResponseEntity setProduto(@RequestBody Produto produto){
-        produtoService.saveProduto(produto);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(produtoService.saveProduto(produto));
     }
     
     @PutMapping("/{id}")
     public ResponseEntity updateProduto(@PathVariable Long id, @RequestBody Produto produto){
-        produtoService.updateProduto(id, produto);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(produtoService.updateProduto(id, produto));
     }
     
     @DeleteMapping("/{id}")
     public ResponseEntity deleteProduto(@PathVariable Long id){
-        produtoService.delteProduto(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(produtoService.delteProduto(id));
     }
             
 }
