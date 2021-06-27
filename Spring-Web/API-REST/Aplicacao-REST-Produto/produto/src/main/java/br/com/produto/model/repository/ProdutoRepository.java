@@ -1,4 +1,4 @@
-package br.com.produto.repository;
+package br.com.produto.model.repository;
 
 import br.com.produto.model.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,7 +1,7 @@
 package br.com.produto.rest;
 
 import br.com.produto.model.Produto;
-import br.com.produto.service.ProdutoService;
+import br.com.produto.model.service.ProdutoService;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

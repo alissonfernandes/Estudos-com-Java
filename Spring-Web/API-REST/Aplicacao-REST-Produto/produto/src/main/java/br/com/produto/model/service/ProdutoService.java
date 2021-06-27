@@ -1,7 +1,7 @@
-package br.com.produto.service;
+package br.com.produto.model.service;
 
 import br.com.produto.model.Produto;
-import br.com.produto.repository.ProdutoRepository;
+import br.com.produto.model.repository.ProdutoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
