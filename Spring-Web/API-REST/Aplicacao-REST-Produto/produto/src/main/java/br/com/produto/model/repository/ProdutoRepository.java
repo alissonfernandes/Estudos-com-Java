@@ -1,8 +1,0 @@
-package br.com.produto.model.repository;
-
-import br.com.produto.model.Produto;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface ProdutoRepository extends JpaRepository<Produto, Long>{
-    
-}

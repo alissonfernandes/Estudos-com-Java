@@ -1,32 +1,13 @@
-package br.com.produto.model;
+package br.com.produto.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
 public class Produto {
     
-    @Id
     private Long id;
-    
-    @Column
     private String nome;
-    
-    @Column
     private String descricao;
+    private float preco;
+    private int estoque;
     
-    public Produto(){}
-
-    public Produto(Long id, String nome, String descricao) {
-        this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
-    }
-    
-
     public Long getId() {
         return id;
     }
@@ -34,7 +15,7 @@ public class Produto {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     public String getNome() {
         return nome;
     }
@@ -51,4 +32,20 @@ public class Produto {
         this.descricao = descricao;
     }
 
+    public float getPreco() {
+        return preco;
+    }
+
+    public void setPreco(float preco) {
+        this.preco = preco;
+    }
+
+    public int getEstoque() {
+        return estoque;
+    }
+
+    public void setEstoque(int estoque) {
+        this.estoque = estoque;
+    }
+    
 }
