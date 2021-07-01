@@ -1,14 +1,14 @@
 package br.com.produto.model;
 
-import br.com.produto.dto.Produto;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.springframework.hateoas.RepresentationModel;
 
 @Entity
 @Table(name = "produto")
-public class ProdutoEntity {
+public class ProdutoEntity  extends RepresentationModel<ProdutoEntity>{
     
     @Id
     private Long id;

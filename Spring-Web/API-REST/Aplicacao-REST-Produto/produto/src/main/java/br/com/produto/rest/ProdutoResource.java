@@ -26,12 +26,12 @@ public class ProdutoResource {
     }
     
     @GetMapping("/")
-    public ResponseEntity<List<Produto>> getAllProduto(){
+    public ResponseEntity<List<ProdutoEntity>> getAllProduto(){
         return ResponseEntity.status(HttpStatus.OK).body(produtoService.findAllProduto());
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<Produto> getProduto(@PathVariable Long id){
+    public ResponseEntity getProduto(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(produtoService.findProduto(id));
     }
     
