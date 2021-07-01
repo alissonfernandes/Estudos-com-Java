@@ -1,5 +1,6 @@
 package br.com.produto.rest;
 
+import br.com.produto.dto.Produto;
 import br.com.produto.model.ProdutoEntity;
 import br.com.produto.service.ProdutoService;
 import java.util.List;
@@ -25,18 +26,18 @@ public class ProdutoResource {
     }
     
     @GetMapping("/")
-    public ResponseEntity<List<ProdutoEntity>> getAllProduto(){
+    public ResponseEntity<List<Produto>> getAllProduto(){
         return ResponseEntity.status(HttpStatus.OK).body(produtoService.findAllProduto());
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<ProdutoEntity> getProduto(@PathVariable Long id){
+    public ResponseEntity<Produto> getProduto(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(produtoService.findProduto(id));
     }
     
     @PostMapping("/")
-    public ResponseEntity setProduto(@RequestBody ProdutoEntity produto){
-        return ResponseEntity.status(HttpStatus.CREATED).body(produtoService.saveProduto(produto));
+    public ResponseEntity setProduto(@RequestBody ProdutoEntity produtoEntity){
+        return ResponseEntity.status(HttpStatus.CREATED).body(produtoService.saveProduto(produtoEntity));
     }
     
     @PutMapping("/{id}")

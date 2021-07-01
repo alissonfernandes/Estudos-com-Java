@@ -1,5 +1,6 @@
 package br.com.produto.model;
 
+import br.com.produto.dto.Produto;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -34,7 +35,7 @@ public class ProdutoEntity {
         this.estoque = estoque;
     }
     
-
+    
     public Long getId() {
         return id;
     }
@@ -74,5 +75,5 @@ public class ProdutoEntity {
     public void setEstoque(int estoque) {
         this.estoque = estoque;
     }
-    
+
 }

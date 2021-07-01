@@ -1,9 +1,11 @@
 package br.com.produto.service;
 
+import br.com.produto.dto.Produto;
 import br.com.produto.model.ProdutoEntity;
 import br.com.produto.repository.ProdutoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,21 +17,21 @@ public class ProdutoService {
     
     ObjectMapper objectMapper;
     
-    public List<ProdutoEntity> findAllProduto(){
-        List<ProdutoEntity> produtos = repository.findAll();
-        /*List<ProdutoDto> produtosDto = produtos.stream()
-                .map(produto -> objectMapper.convertValue(produto, ProdutoDto.class))
+    public List<Produto> findAllProduto(){
+        List<ProdutoEntity> produtosEntity = repository.findAll();
+        List<Produto> produtos = produtosEntity.stream()
+                .map(obj -> new Produto(obj))
                 .collect(Collectors.toList());
-         repository.findAll().forEach((p) -> {objectMapper.convertValue(p, ProdutoDto.class);});*/
         return produtos;
     }
     
-    public ProdutoEntity findProduto(Long id){
-        return repository.findById(id).get();
+    public Produto findProduto(Long id){
+        Produto produto = new Produto(repository.findById(id).get());
+        return produto;
     }
     
-    public ProdutoEntity saveProduto(ProdutoEntity produto){
-        return repository.save(produto);
+    public ProdutoEntity saveProduto(ProdutoEntity produtoEntity){
+        return repository.save(produtoEntity);
     }
     
     public ProdutoEntity updateProduto(Long id, ProdutoEntity produto){
