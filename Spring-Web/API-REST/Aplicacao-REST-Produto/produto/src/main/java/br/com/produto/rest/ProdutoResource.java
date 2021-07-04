@@ -1,6 +1,5 @@
 package br.com.produto.rest;
 
-import br.com.produto.dto.Produto;
 import br.com.produto.model.ProdutoEntity;
 import br.com.produto.service.ProdutoService;
 import java.util.List;
