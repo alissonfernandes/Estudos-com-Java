@@ -7,8 +7,8 @@ import br.com.produto.rest.ProdutoResource;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import org.springframework.stereotype.Service;
@@ -26,19 +26,15 @@ public class ProdutoService {
         
         for(ProdutoEntity produto : produtosEntity){
             long id = produto.getId();
-            produto.add(linkTo(methodOn(ProdutoResource.class).getProduto(id)).withSelfRel());
+            produto.add(getLinkToProduto(id));
         }
-        
-        /*List<Produto> produtos = produtosEntity.stream()
-                .map(obj -> new Produto(obj))
-                .collect(Collectors.toList());*/
         return produtosEntity;
     }
     
     public ProdutoEntity findProduto(Long id){
         Optional<ProdutoEntity> produto = repository.findById(id);
-        produto.get().add(linkTo(methodOn(ProdutoResource.class).getAllProduto()).withRel("List Produtos"));
-        //Produto produto = new Produto(repository.findById(id).get());
+        produto.get().add(getLinkToUpdate(produto.get().getId(), produto.get()));
+        produto.get().add(getLinkToAllProdutos());
         return produto.get();
     }
     
@@ -48,11 +44,27 @@ public class ProdutoService {
     
     public ProdutoEntity updateProduto(Long id, ProdutoEntity produto){
         produto.setId(id);
-        return repository.save(produto);
+        return repository.save(produto).add(getLinkToProduto(id), getLinkToAllProdutos());
     }
     
     public ProdutoEntity delteProduto(Long id){
         repository.deleteById(id);
         return new ProdutoEntity();
+    }
+    
+    /*To List_Produtos*/
+    private Link getLinkToAllProdutos(){
+        return linkTo(methodOn(ProdutoResource.class).getAllProduto()).withRel("List_Produtos");
+    }
+    
+    /*To Produtos*/
+    private Link getLinkToProduto(Long id){
+        return linkTo(methodOn(ProdutoResource.class).getProduto(id)).withSelfRel();
+    }
+    
+    /*To UPDATE*/
+    private Link getLinkToUpdate(Long id, ProdutoEntity produto){
+        Link link = linkTo(methodOn(ProdutoResource.class).updateProduto(id, produto)).withRel("update").withTitle("Atualizar dados").withType("PUT");
+        return link;
     }
 }
