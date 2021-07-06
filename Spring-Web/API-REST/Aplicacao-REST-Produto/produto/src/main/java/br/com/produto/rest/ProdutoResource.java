@@ -1,6 +1,7 @@
 package br.com.produto.rest;
 
 import br.com.produto.model.ProdutoEntity;
+import br.com.produto.response.ProdutoResponse;
 import br.com.produto.service.ProdutoService;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -30,8 +31,9 @@ public class ProdutoResource {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity getProduto(@PathVariable Long id){
-        return ResponseEntity.status(HttpStatus.OK).body(produtoService.findProduto(id));
+    public ResponseEntity<ProdutoResponse> getProduto(@PathVariable Long id){
+        ProdutoResponse produtoResponse = produtoService.findProduto(id);
+        return ResponseEntity.status(HttpStatus.OK).body(produtoResponse);
     }
     
     @PostMapping("/")

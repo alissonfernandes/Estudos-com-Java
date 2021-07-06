@@ -2,6 +2,8 @@ package br.com.produto.service;
 
 import br.com.produto.model.ProdutoEntity;
 import br.com.produto.repository.ProdutoRepository;
+import br.com.produto.resource.ResourceProduto;
+import br.com.produto.response.ProdutoResponse;
 import br.com.produto.rest.ProdutoResource;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
@@ -18,6 +20,9 @@ public class ProdutoService {
     @Autowired
     ProdutoRepository repository;
     
+    @Autowired
+    private ResourceProduto resourceProduto;
+    
     ObjectMapper objectMapper;
     
     public List<ProdutoEntity> findAllProduto(){
@@ -30,12 +35,19 @@ public class ProdutoService {
         return produtosEntity;
     }
     
-    public ProdutoEntity findProduto(Long id){
-        Optional<ProdutoEntity> produto = repository.findById(id);
-        produto.get().add(getLinkToUpdate(produto.get().getId(), produto.get()));
+    public ProdutoResponse findProduto(Long id){
+        Optional<ProdutoEntity> produtoEntity = repository.findById(id);
+        ProdutoResponse p= resourceProduto.criarLinkCompleto(produtoEntity.get());
+       /* p.setId(1L);
+        p.setNome("Nome");
+        p.setDescricao("descrip");
+        p.setEstoque(20);
+        p.setPreco(0.0f);*/
+        
+        /*produto.get().add(getLinkToUpdate(produto.get().getId(), produto.get()));
         produto.get().add(getLinkToDelete(id));
-        produto.get().add(getLinkToAllProdutos());
-        return produto.get();
+        produto.get().add(getLinkToAllProdutos());*/
+        return p;
     }
     
     public ProdutoEntity saveProduto(ProdutoEntity produtoEntity){
