@@ -1,7 +1,9 @@
 package br.com.produto.service;
 
+import br.com.produto.dto.Produto;
 import br.com.produto.model.ProdutoEntity;
 import br.com.produto.repository.ProdutoRepository;
+import br.com.produto.request.ProdutoRequest;
 import br.com.produto.resource.ResourceProduto;
 import br.com.produto.response.ProdutoListResponse;
 import br.com.produto.response.ProdutoResponse;
@@ -21,7 +23,8 @@ public class ProdutoService {
     @Autowired
     private ResourceProduto resourceProduto;
     
-    ObjectMapper objectMapper;
+    @Autowired
+    private ObjectMapper objectMapper;
     
     public List<ProdutoListResponse> findAllProduto(){
         List<ProdutoEntity> produtosEntity = repository.findAll();
@@ -31,13 +34,14 @@ public class ProdutoService {
         return produtoListResponse;
     }
     
-    public ProdutoResponse findProduto(Long id){
-        Optional<ProdutoEntity> produtoEntity = repository.findById(id);
+    public ProdutoResponse findProduto(ProdutoRequest produtoRequest){
+        Optional<ProdutoEntity> produtoEntity = repository.findById(produtoRequest.getId());
         ProdutoResponse produtoResponse = resourceProduto.addLinkFindProduto(produtoEntity.get());
         return produtoResponse;
     }
     
-    public ProdutoEntity saveProduto(ProdutoEntity produtoEntity){
+    public ProdutoEntity saveProduto(Produto produtoDto){
+        ProdutoEntity produtoEntity = objectMapper.convertValue(produtoDto, ProdutoEntity.class);
         return repository.save(produtoEntity);
     }
     

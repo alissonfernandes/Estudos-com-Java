@@ -1,9 +1,9 @@
 package br.com.produto.dto;
 
 import br.com.produto.model.ProdutoEntity;
-import java.io.Serializable;
+import org.springframework.hateoas.RepresentationModel;
 
-public class Produto implements Serializable{
+public class Produto extends RepresentationModel<ProdutoEntity>{
     
     private Long id;
     private String nome;
@@ -11,14 +11,6 @@ public class Produto implements Serializable{
     private float preco;
     private int estoque;
 
-    public Produto(ProdutoEntity produtoEntity) {
-        this.id = produtoEntity.getId();
-        this.nome = produtoEntity.getNome();
-        this.descricao = produtoEntity.getDescricao();
-        this.preco = produtoEntity.getPreco();
-        this.estoque = produtoEntity.getEstoque();
-    }
-    
     public Long getId() {
         return id;
     }

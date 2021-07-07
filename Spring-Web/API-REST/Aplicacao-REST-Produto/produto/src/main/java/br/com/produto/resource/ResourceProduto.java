@@ -5,7 +5,6 @@ import br.com.produto.response.ProdutoListResponse;
 import br.com.produto.response.ProdutoResponse;
 import br.com.produto.rest.ProdutoResource;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.List;
 import org.springframework.hateoas.Link;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
