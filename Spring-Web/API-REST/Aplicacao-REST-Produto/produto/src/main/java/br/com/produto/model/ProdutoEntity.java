@@ -1,5 +1,6 @@
 package br.com.produto.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -35,11 +36,11 @@ public class ProdutoEntity  extends RepresentationModel<ProdutoEntity>{
         this.estoque = estoque;
     }
     
-    
+    @JsonProperty("id")
     public Long getId() {
         return id;
     }
-
+    @JsonProperty("id")
     public void setId(Long id) {
         this.id = id;
     }

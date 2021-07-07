@@ -1,7 +1,6 @@
 package br.com.produto.response;
 
 import br.com.produto.model.ProdutoEntity;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.hateoas.RepresentationModel;
 
 public class ProdutoResponse extends RepresentationModel<ProdutoEntity>{
@@ -21,20 +20,18 @@ public class ProdutoResponse extends RepresentationModel<ProdutoEntity>{
     
     public ProdutoResponse(){}
 
-    @JsonProperty("id")
     public Long getId() {
         return id;
     }
 
-    @JsonProperty("id")
     public void setId(Long id) {
         this.id = id;
     }
-
+  
     public String getNome() {
         return nome;
     }
-
+    
     public void setNome(String nome) {
         this.nome = nome;
     }

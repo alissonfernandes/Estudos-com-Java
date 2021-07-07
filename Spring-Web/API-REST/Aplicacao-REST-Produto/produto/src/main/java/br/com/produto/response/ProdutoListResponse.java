@@ -1,19 +1,23 @@
 package br.com.produto.response;
 
 import br.com.produto.model.ProdutoEntity;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.hateoas.RepresentationModel;
 
-public class ProdutoListResponse extends RepresentationModel<ProdutoEntity>{
+public class ProdutoListResponse extends RepresentationModel<ProdutoListResponse>{
     private Long id;
     private String nome;
     private float preco;
+
+    public ProdutoListResponse(ProdutoEntity produtoEntity) {
+        this.id = produtoEntity.getId();
+        this.nome = produtoEntity.getNome();
+        this.preco = produtoEntity.getPreco();
+    }
     
-    @JsonProperty("id")
     public Long getId() {
         return id;
     }
-    @JsonProperty("id")
+    
     public void setId(Long id) {
         this.id = id;
     }
@@ -33,8 +37,4 @@ public class ProdutoListResponse extends RepresentationModel<ProdutoEntity>{
     public void setPreco(float preco) {
         this.preco = preco;
     }
-    
-    
-    
-    
 }
