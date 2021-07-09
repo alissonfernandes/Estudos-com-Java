@@ -33,4 +33,13 @@ Uma API HATEOAS provê informações que permite navegar entre seus endpoints de
 
 Com isso deixamos a responsabilidade de acessos e ações para o backend da aplicação.
 
-* 
+## Filter
+*  init(FilterConfig filterConfig);
+* Chamado pelo contêiner da web para indicar para um filtro que ele está sendo colocado em serviço.
+
+### `doFilter()`
+O doFilter() método do filtro é chamado pelo contêiner toda vez que um par de solicitação/resposta é passado pela cadeia devido a uma solicitação do cliente por um recurso no final da cadeia. O FilterChain transmitido para esse método permite que o Filter transmita a solicitação e a resposta para a próxima entidade na cadeia.
+
+### `destroy();`
+Esse método é chamado apenas quando todos os threads no método doFilter tiverem saída ou após um período de tempo limite. Depois que o contêiner da Web chamar esse método, ele não chamará o método do Filter novamente nesta instância do filtro.
+
